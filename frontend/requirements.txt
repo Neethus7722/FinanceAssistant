@@ -1,0 +1,6 @@
+# Streamlit requirements
+streamlit
+requests
+uuid
+python-dotenv
+msal-streamlit-auth

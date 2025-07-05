@@ -1,0 +1,18 @@
+# FastAPI requirements
+fastapi
+uvicorn
+sqlalchemy
+asyncpg
+pandas
+python-dotenv
+azure-identity
+azure-ai-ml
+openai
+python-jose[cryptography]
+passlib[bcrypt]
+psycopg2-binary
+azure-cosmos
+langchain
+requests
+# For async Azure Blob Storage
+azure-storage-blob
