@@ -13,6 +13,8 @@ passlib[bcrypt]
 psycopg2-binary
 azure-cosmos
 langchain
+langgraph
+altair
 requests
 # For async Azure Blob Storage
 azure-storage-blob

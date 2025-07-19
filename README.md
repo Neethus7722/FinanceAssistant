@@ -5,9 +5,10 @@ A secure, LLM-powered conversational system for accurate financial intelligence.
 ## Features
 - Natural language financial queries (revenue, margin, cost, project performance)
 - Secure, role-aware interface (Azure AD integration)
-- Retrieval-Augmented Generation (RAG) with GPT-4o for summaries and charts
+- Retrieval-Augmented Generation (RAG) with GPT-4o for summaries
+- Evidence panel with SQL, data tables, and Altair charts
 - PostgreSQL-backed structured store from Excel data
-- Enterprise-ready UI (Streamlit)
+- Enterprise-ready UI (Streamlit) with role-aware views
 - Modular, extensible, and Azure-ready
 
 ## Tech Stack

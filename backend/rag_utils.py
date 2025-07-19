@@ -4,6 +4,8 @@ import os
 from sqlalchemy import text
 from db import engine
 from fastapi import HTTPException
+import pandas as pd
+import altair as alt
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "your-azure-openai-key")
 OPENAI_API_BASE = os.getenv("OPENAI_API_BASE", "https://your-azure-openai-resource.openai.azure.com/")
@@ -64,6 +66,22 @@ async def run_rag_pipeline(user_query: str, user_role: str = 'user'):
                 raise HTTPException(status_code=400, detail=f"SQL execution error: {str(e)}\nSQL: {sql}")
         rows = mask_data(rows, user_role)
         context = "\n".join([str(row) for row in rows])
+        # Prepare Altair chart if possible
+        chart_spec = None
+        try:
+            df = pd.DataFrame(rows)
+            if not df.empty and len(df.columns) >= 2:
+                y_col = df.select_dtypes(include="number").columns.tolist()
+                x_col = [c for c in df.columns if c not in y_col]
+                if y_col and x_col:
+                    chart = (
+                        alt.Chart(df)
+                        .mark_bar()
+                        .encode(x=x_col[0], y=y_col[0])
+                    )
+                    chart_spec = chart.to_dict()
+        except Exception:
+            chart_spec = None
         prompt = f"Context:\n{context}\n\nUser Query: {user_query}\n\nAnswer as a financial analytics expert. Provide a summary and, if relevant, a table or chart-ready data."
         openai.api_type = "azure"
         openai.api_key = OPENAI_API_KEY
@@ -80,7 +98,7 @@ async def run_rag_pipeline(user_query: str, user_role: str = 'user'):
             answer = response.choices[0].message["content"]
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Error generating LLM response: {str(e)}")
-        return {"result": answer, "sql": sql, "data": rows}
+        return {"result": answer, "sql": sql, "data": rows, "chart": chart_spec}
     except HTTPException as e:
         raise e
     except Exception as e:
