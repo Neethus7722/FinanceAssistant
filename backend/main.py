@@ -22,6 +22,7 @@ from backend.schemas import ChatMessage, ChatHistoryRequest, RAGQueryRequest, Ex
 from backend.db import engine
 from backend.storage_utils import fetch_excel_from_blob, read_excel_to_df
 from backend.rag_utils import run_rag_pipeline
+from backend.langgraph_pipeline import run_langgraph_pipeline
 from backend.cosmos_utils import save_chat_message, get_chat_history, get_all_sessions
 from fastapi.responses import JSONResponse
 
@@ -162,6 +163,17 @@ def mask_data(rows, user_role):
 async def rag_advanced(request: AdvancedRAGRequest):
     try:
         result = await run_rag_pipeline(request.query, request.user_role)
+        return JSONResponse(content=result)
+    except HTTPException as e:
+        return JSONResponse(status_code=e.status_code, content={"error": e.detail})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": f"Unexpected error: {str(e)}"})
+
+@app.post("/graph-analysis/")
+async def graph_analysis(request: AdvancedRAGRequest):
+    """Endpoint using the LangGraph orchestration pipeline."""
+    try:
+        result = run_langgraph_pipeline(request.query, request.user_role)
         return JSONResponse(content=result)
     except HTTPException as e:
         return JSONResponse(status_code=e.status_code, content={"error": e.detail})

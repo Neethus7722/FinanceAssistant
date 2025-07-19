@@ -1,6 +1,8 @@
 import streamlit as st
 from core import fetch_all_sessions, fetch_chat_history, send_rag_query
 import uuid
+import pandas as pd
+import altair as alt
 
 st.set_page_config(page_title="NextGen Revenue Insights Assistant", layout="wide")
 
@@ -43,9 +45,23 @@ if submit and query:
     with st.spinner("Thinking..."):
         response = send_rag_query(query, st.session_state["user_id"], "admin" if st.session_state["user_id"] == "admin_id" else "user")
         if response.status_code == 200:
-            result = response.json().get("result", "No result returned.")
+            payload = response.json()
+            result = payload.get("result", "No result returned.")
             st.session_state.setdefault("chat_history", []).append({"user": query, "assistant": result})
             st.success(result)
+
+            with st.expander("Evidence", expanded=False):
+                st.markdown("**Generated SQL**")
+                st.code(payload.get("sql", ""))
+                data = payload.get("data", [])
+                if data:
+                    df = pd.DataFrame(data)
+                    st.markdown("**Data**")
+                    st.dataframe(df)
+                    chart_spec = payload.get("chart")
+                    if chart_spec:
+                        chart = alt.Chart.from_dict(chart_spec)
+                        st.altair_chart(chart, use_container_width=True)
         else:
             error_msg = response.json().get("error", response.text)
             st.error(f"Error: {error_msg}")

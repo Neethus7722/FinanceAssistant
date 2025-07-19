@@ -4,3 +4,4 @@ requests
 uuid
 python-dotenv
 msal-streamlit-auth
+altair
