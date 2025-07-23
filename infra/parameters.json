@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "East US"
+    },
+    "environment": {
+      "value": "prod"
+    },
+    "appNamePrefix": {
+      "value": "financeassistant"
+    },
+    "postgresAdminLogin": {
+      "value": "financeadmin"
+    },
+    "postgresAdminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.KeyVault/vaults/{kv-name}"
+        },
+        "secretName": "postgres-admin-password"
+      }
+    },
+    "openaiApiKey": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.KeyVault/vaults/{kv-name}"
+        },
+        "secretName": "openai-api-key"
+      }
+    },
+    "openaiApiBase": {
+      "value": "https://your-azure-openai.openai.azure.com/"
+    }
+  }
+}

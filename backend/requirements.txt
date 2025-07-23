@@ -1,20 +1,100 @@
-# FastAPI requirements
-fastapi
-uvicorn
-sqlalchemy
-asyncpg
-pandas
-python-dotenv
-azure-identity
-azure-ai-ml
-openai
-python-jose[cryptography]
-passlib[bcrypt]
-psycopg2-binary
-azure-cosmos
-langchain
-langgraph
-altair
-requests
-# For async Azure Blob Storage
-azure-storage-blob
+# NextGen Revenue Insights Assistant - Backend Requirements (Updated)
+# Core FastAPI and async support
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+starlette>=0.27.0
+
+# Database and ORM
+sqlalchemy>=2.0.23
+asyncpg>=0.29.0
+alembic>=1.12.1
+psycopg2-binary>=2.9.9
+
+# Data processing and analysis
+pandas>=2.1.4
+numpy>=1.24.4
+openpyxl>=3.1.2
+
+# Database management tools (for standalone scripts)
+tabulate>=0.9.0
+
+# Machine Learning and Forecasting
+prophet>=1.1.5
+xgboost>=2.0.3
+scikit-learn>=1.3.2
+
+# Azure services
+azure-identity>=1.15.0
+azure-storage-blob>=12.19.0
+azure-keyvault-secrets>=4.7.0
+
+# OpenAI and LangChain ecosystem - Updated for compatibility
+openai>=1.6.1
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-experimental>=0.0.47
+langchain-community>=0.0.8
+langchain-core>=0.1.5
+langgraph>=0.0.26
+
+# Authentication and security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+
+# Visualization and data export
+altair>=5.2.0
+plotly>=5.17.0
+matplotlib>=3.8.2
+seaborn>=0.13.0
+
+# Microsoft Graph and Dynamics 365
+msal>=1.25.0
+requests>=2.31.0
+requests-oauthlib>=1.3.1
+aiohttp>=3.9.1
+
+# Utilities
+python-dotenv>=1.0.0
+pydantic>=2.5.2
+httpx>=0.25.2
+aiofiles>=23.2.1
+python-dateutil>=2.8.2
+
+# Development and testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1
+black>=23.11.0
+flake8>=6.1.0
+
+# Additional ML/AI dependencies
+langsmith>=0.0.77
+dataclasses-json>=0.5.7
+jsonpatch>=1.33
+tenacity>=8.1.0
+
+# Additional Azure dependencies
+azure-common>=1.1.28
+
+# For async handling and HTTP requests
+async-timeout>=4.0.3
+requests>=2.31.0
+aiohttp>=3.9.1
+
+# JSON Web Token support
+python-jose[cryptography]>=3.3.0
+
+# Command line tools for Prophet
+cmdstanpy>=1.0.4
+holidays>=0.25
+importlib-resources>=6.0.0
+
+# Additional utilities for backend API
+# Note: uuid is part of Python standard library
+# Note: re is part of Python standard library
+
+# Development tools (optional but recommended)
+black>=23.11.0
+flake8>=6.1.0
+pytest>=7.4.3
+pytest-asyncio>=0.21.1

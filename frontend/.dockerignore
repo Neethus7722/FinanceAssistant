@@ -1,0 +1,26 @@
+# Frontend .dockerignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.env.*
+.venv/
+venv/
+.git/
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.idea/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db
+.streamlit/
