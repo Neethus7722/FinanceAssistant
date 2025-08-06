@@ -1,0 +1,29 @@
+# NextGen Revenue Insights - Data Layer Requirements
+# ================================================
+
+# Database connectivity
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+
+# Data processing
+pandas==2.2.2
+numpy==1.24.3
+
+# Environment management
+python-dotenv==1.0.1
+
+# Embedding models
+sentence-transformers==2.7.0
+torch==2.0.1
+transformers==4.42.4
+
+# Azure OpenAI (optional)
+openai==0.28.1
+
+# Excel file processing
+openpyxl==3.1.2
+xlrd==2.0.1
+
+# Environment variables for TensorFlow warnings
+# Set TF_ENABLE_ONEDNN_OPTS=0 to disable oneDNN optimizations warnings
